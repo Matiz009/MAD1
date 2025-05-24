@@ -1,4 +1,7 @@
+import 'package:app_one/books.dart';
+import 'package:app_one/themeprovider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -9,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   var likes = 0;
+
   void incrementLikes() {
     setState(() {
       likes = likes + 1;
@@ -23,15 +27,24 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('UI Design', style: TextStyle(color: Colors.white)),
         leading: const Icon(Icons.menu, color: Colors.white),
-
         backgroundColor: Colors.blueAccent,
         centerTitle: true,
         titleSpacing: 20,
         actions: [
+          // 🔁 Theme toggle switch
+          Switch(
+            value: themeProvider.isDarkMode,
+            onChanged: (value) {
+              themeProvider.toggleTheme(value);
+            },
+            activeColor: Colors.white,
+          ),
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
             child: CircleAvatar(
@@ -43,74 +56,56 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: Column(
-        mainAxisAlignment:
-            MainAxisAlignment.center, // Center content vertically
-        children: [
-          const SizedBox(height: 20),
-          Image.asset('assets/hero-image.png'),
-          Text(
-            'Likes: $likes',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.blueAccent,
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: 20),
+            Image.asset('assets/hero-image.png'),
+            Text(
+              'Likes: $likes',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.blueAccent,
+              ),
             ),
-          ),
-          const SizedBox(height: 10), // Add spacing between text and buttons
-          Center(
-            child: Row(
-              mainAxisAlignment:
-                  MainAxisAlignment.center, // Center buttons horizontally
-              children: [
-                ElevatedButton(
-                  onPressed: incrementLikes,
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.blueAccent,
-                  ), // Changed to +
-                ),
-                const SizedBox(width: 10),
-                ElevatedButton(
-                  onPressed: decrementLikes,
-                  child: const Icon(
-                    Icons.remove,
-                    color: Colors.blueAccent,
-                  ), // Changed to -
-                ),
-              ],
+            const SizedBox(height: 10),
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: incrementLikes,
+                    child: const Icon(Icons.add, color: Colors.blueAccent),
+                  ),
+                  const SizedBox(width: 10),
+                  ElevatedButton(
+                    onPressed: decrementLikes,
+                    child: const Icon(Icons.remove, color: Colors.blueAccent),
+                  ),
+                ],
+              ),
             ),
-          ),
-          TextButton(
-            onPressed: () {
-              // Navigator.pushReplacement(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => Screen2()),
-              // );
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => Screen2()),
-              // );
-              Navigator.pushNamed(context, "/two");
-            },
-            child: Text("Send Data"),
-          ),
-          const SizedBox(height: 20),
-          TextButton(
-            onPressed: () {
-              // Navigator.pushReplacement(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => Screen2()),
-              // );
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => Screen2()),
-              // );
-              Navigator.pushNamed(context, "/posts");
-            },
-            child: Text("View Posts"),
-          ),
-        ],
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Books()),
+                );
+              },
+              child: const Text("Send Data"),
+            ),
+            const SizedBox(height: 20),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/posts");
+              },
+              child: const Text("View Posts"),
+            ),
+          ],
+        ),
       ),
     );
   }
