@@ -16,8 +16,8 @@ final lightTheme = ThemeData(
 
 final darkTheme = ThemeData(
   brightness: Brightness.dark,
-  primaryColor: Colors.deepPurple,
-  fontFamily: 'Roboto',
+  primaryColor: Colors.redAccent,
+  fontFamily: 'georgia',
   useMaterial3: true,
 );
 
