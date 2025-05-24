@@ -11,10 +11,10 @@
 .svn/
 .swiftpm/
 migrate_working_dir/
-linux/
-test/
-web/
-windows/
+.linux/
+.test/
+.web/
+.windows/
 
 
 # IntelliJ related
