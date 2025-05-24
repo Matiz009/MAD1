@@ -11,18 +11,21 @@
 .svn/
 .swiftpm/
 migrate_working_dir/
-.linux/
-.test/
-.web/
-.windows/
-
+build/
+# Android Studio related
+*.apk
+ios/
+linux/
+macos/
+windows/
+web/
+test/
 
 # IntelliJ related
 *.iml
 *.ipr
 *.iws
 .idea/
-
 
 # The .vscode folder contains launch configuration and tasks you configure in
 # VS Code which you may wish to be included in version control, so this line
