@@ -1,8 +1,8 @@
+import 'package:app_one/posts2.dart';
 import 'package:app_one/themeprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'books.dart';
-import 'posts.dart';
 import 'screen2.dart';
 import 'splash_screen.dart';
 import 'users.dart';
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/two': ((context) => Screen2()),
         '/books': ((context) => Books()),
-        '/posts': ((context) => PostsScreen()),
+        '/posts': ((context) => Posts2()),
         '/users': ((context) => Users()),
       },
       theme: lightTheme,
